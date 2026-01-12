@@ -1,21 +1,19 @@
-package commands
+package main
 
 import (
-    "fmt"
     "math/rand"
     "time"
 
     tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func HandleDice(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-    if update.Message.Text != "نرد" { // بدون شخطه
-        return
-    }
-
+func Handle(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
     rand.Seed(time.Now().UnixNano())
     value := rand.Intn(6) + 1
 
-    msg := fmt.Sprintf("🎲 رميت النرد وطلعت: %d", value)
-    bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, msg))
+    text := "🎲 رمي النرد...\n"
+    text += "الحظ يبتسم لك! الرقم: " + string(rune('0'+value))
+
+    msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
+    bot.Send(msg)
 }
