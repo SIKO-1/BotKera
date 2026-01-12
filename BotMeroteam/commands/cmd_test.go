@@ -1,10 +1,8 @@
-package main
+package commands
 
-import (
-    tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-)
+import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
-func Handle(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-    msg := tgbotapi.NewMessage(update.Message.Chat.ID, "✅ البوت شغال وسريع!")
-    bot.Send(msg)
+func CmdTest(bot *tgbotapi.BotAPI, msg *tgbotapi.Message) {
+	reply := tgbotapi.NewMessage(msg.Chat.ID, "⚡ البوت شغال ويرد فوراً")
+	bot.Send(reply)
 }
