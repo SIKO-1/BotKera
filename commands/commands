@@ -1,0 +1,4 @@
+commands/
+├─ cmd_stats.go        # إحصائيات المستخدم
+├─ game_dice.go        # لعبة النرد
+├─ game_roulette.go    # لعبة الروليت
