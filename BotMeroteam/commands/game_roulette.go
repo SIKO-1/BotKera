@@ -1,20 +1,21 @@
-package main
+package commands
 
 import (
-    "math/rand"
-    "time"
+	"math/rand"
+	"time"
 
-    tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func Handle(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-    rand.Seed(time.Now().UnixNano())
-    outcomes := []string{"فوز", "خسارة", "جاكبوت"}
-    result := outcomes[rand.Intn(len(outcomes))]
+func GameRoulette(bot *tgbotapi.BotAPI, msg *tgbotapi.Message) {
+	rand.Seed(time.Now().UnixNano())
 
-    text := "🎰 روليت الإمبراطورية...\n"
-    text += "النتيجة: " + result
+	outcomes := []string{
+		"🎉 فزت!",
+		"💀 خسرت!",
+		"🔥 جاكبوت!",
+	}
 
-    msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
-    bot.Send(msg)
+	result := outcomes[rand.Intn(len(outcomes))]
+	bot.Send(tgbotapi.NewMessage(msg.Chat.ID, result))
 }
